@@ -1,0 +1,24 @@
+import copy
+
+#different in copy and deepcopy
+
+#copy  若对象中还存在一层数据结构，里面的那一层的地址是和copy的那个目标的地址一致
+#[1, 2, 3]copy出去的话，互不影响
+#[1, 2, [3, 4, 5]]copy出去的话，列表索引为0和1的元素变化不会影响，但是里面的小列表发生变化，原列表也会随着发生改变
+#而deepcopy则不会，它是完全将产生一个新的地址，不管原数据是什么结构
+
+clist = ['it', ['hi', 'hello'],'he', 'she']
+c1list = copy.copy(clist)
+
+c1list[1][0] = 'animal'
+print(id(clist), id(c1list))#id不一样
+print(id(clist[1]), id(c1list[1]))#id一样
+print(c1list, clist)
+
+
+c2list = copy.deepcopy(clist)
+
+c2list[1][1] = 'lilei'
+print(id(clist[1]), id(c2list[1]))#id不一样
+print(id(clist), id(c1list), id(c2list))
+print(c2list, c1list, clist)
